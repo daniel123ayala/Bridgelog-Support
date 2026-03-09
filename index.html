@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BridgeLog - Support</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: #1d1d1f;
+            background-color: #f5f5f7;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: #ffffff;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 20px 0;
+        }
+
+        header .container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        header h1 {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        nav {
+            background-color: #ffffff;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 12px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav .container {
+            display: flex;
+            gap: 24px;
+            overflow-x: auto;
+        }
+
+        nav a {
+            color: #0066cc;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        main {
+            padding: 40px 0 60px;
+        }
+
+        .page-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .page-subtitle {
+            font-size: 16px;
+            color: #86868b;
+            margin-bottom: 36px;
+        }
+
+        .intro-card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 32px;
+            border-left: 4px solid #0066cc;
+        }
+
+        .intro-card p {
+            font-size: 16px;
+            color: #1d1d1f;
+        }
+
+        section {
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 28px;
+            margin-bottom: 20px;
+        }
+
+        section h2 {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #1d1d1f;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        section h3 {
+            font-size: 17px;
+            font-weight: 600;
+            margin-top: 20px;
+            margin-bottom: 8px;
+            color: #1d1d1f;
+        }
+
+        section h3:first-of-type {
+            margin-top: 4px;
+        }
+
+        section p {
+            font-size: 15px;
+            color: #424245;
+            margin-bottom: 12px;
+        }
+
+        section p:last-child {
+            margin-bottom: 0;
+        }
+
+        .step-list {
+            list-style: none;
+            padding: 0;
+            counter-reset: step-counter;
+        }
+
+        .step-list li {
+            font-size: 15px;
+            color: #424245;
+            padding: 10px 0;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .step-list li:last-child {
+            border-bottom: none;
+        }
+
+        .step-list li::before {
+            counter-increment: step-counter;
+            content: counter(step-counter);
+            background-color: #0066cc;
+            color: #ffffff;
+            font-size: 12px;
+            font-weight: 700;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .feature-list li {
+            font-size: 15px;
+            color: #424245;
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+
+        .feature-list li::before {
+            content: "\2022";
+            color: #0066cc;
+            font-size: 18px;
+            flex-shrink: 0;
+            line-height: 1.4;
+        }
+
+        .tip-box {
+            background-color: #f0f7ff;
+            border-radius: 8px;
+            padding: 16px;
+            margin-top: 12px;
+            margin-bottom: 12px;
+        }
+
+        .tip-box p {
+            font-size: 14px;
+            color: #1d1d1f;
+            margin-bottom: 0;
+        }
+
+        .tip-label {
+            font-weight: 600;
+            color: #0066cc;
+        }
+
+        .element-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4px 24px;
+            margin-top: 8px;
+        }
+
+        .element-grid span {
+            font-size: 14px;
+            color: #424245;
+            padding: 4px 0;
+        }
+
+        .export-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 12px;
+        }
+
+        .export-table th {
+            text-align: left;
+            font-size: 14px;
+            font-weight: 600;
+            color: #1d1d1f;
+            padding: 10px 12px;
+            background-color: #f5f5f7;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .export-table td {
+            font-size: 14px;
+            color: #424245;
+            padding: 10px 12px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .export-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .contact-card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 28px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .contact-card h2 {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .contact-card p {
+            font-size: 15px;
+            color: #424245;
+            margin-bottom: 16px;
+        }
+
+        .contact-link {
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .contact-link:hover {
+            text-decoration: underline;
+        }
+
+        .contact-button {
+            display: inline-block;
+            background-color: #0066cc;
+            color: #ffffff;
+            padding: 12px 32px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        .contact-button:hover {
+            background-color: #0055aa;
+        }
+
+        footer {
+            text-align: center;
+            padding: 24px;
+            font-size: 13px;
+            color: #86868b;
+            border-top: 1px solid #e0e0e0;
+            background-color: #ffffff;
+        }
+
+        footer a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+            .page-title {
+                font-size: 26px;
+            }
+
+            .element-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .export-table th,
+            .export-table td {
+                padding: 8px;
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <h1>BridgeLog</h1>
+    </div>
+</header>
+
+<nav>
+    <div class="container">
+        <a href="#overview">Overview</a>
+        <a href="#getting-started">Getting Started</a>
+        <a href="#workflow">Workflow</a>
+        <a href="#features">Features</a>
+        <a href="#exports">Exports</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
+    </div>
+</nav>
+
+<main>
+    <div class="container">
+        <h1 class="page-title">Support</h1>
+        <p class="page-subtitle">Everything you need to get the most out of BridgeLog</p>
+
+        <div class="intro-card">
+            <p>BridgeLog is a field inspection tool for bridge and structural engineers. Capture, organise, and export photo-based inspection records directly from your iPhone. No account required, no internet needed.</p>
+        </div>
+
+        <!-- Overview -->
+        <section id="overview">
+            <h2>Overview</h2>
+            <p>BridgeLog helps you document bridge inspections with photos, organise them by structural element and defect type, mark their locations on plan drawings, and export professional reports. The app works entirely offline with all data stored locally on your device.</p>
+
+            <h3>Key Capabilities</h3>
+            <ul class="feature-list">
+                <li>Capture and import inspection photos with automatic GPS tagging</li>
+                <li>Categorise photos using 43 bridge elements aligned with CS 450</li>
+                <li>Describe defects using 13 comprehensive defect categories</li>
+                <li>Upload plan drawings and mark photo locations with directional markers</li>
+                <li>View all geotagged photos on an interactive GPS map</li>
+                <li>Export as PDF, Word, annotated plan PDF, interactive HTML, or ZIP backup</li>
+                <li>Manage multiple inspection projects from a single gallery</li>
+                <li>Light and dark mode support</li>
+            </ul>
+        </section>
+
+        <!-- Getting Started -->
+        <section id="getting-started">
+            <h2>Getting Started</h2>
+
+            <h3>Creating Your First Inspection</h3>
+            <ol class="step-list">
+                <li>Open BridgeLog and tap "Add Structure" on the gallery screen</li>
+                <li>Enter the name of the bridge or structure you are inspecting</li>
+                <li>Optionally add a plan drawing image at this stage or later</li>
+                <li>Tap "Create" to open your new inspection project</li>
+            </ol>
+
+            <h3>Adding a Plan Drawing</h3>
+            <ol class="step-list">
+                <li>From within your inspection, tap the "Plan" button in the action bar</li>
+                <li>Tap "Set Plan Image" and choose an image from your photo library</li>
+                <li>Your plan drawing is now ready for marking photo locations</li>
+            </ol>
+
+            <div class="tip-box">
+                <p><span class="tip-label">Tip:</span> Use a clear, high resolution plan drawing for the best results when marking photo locations. Screenshots of PDF drawings work well.</p>
+            </div>
+        </section>
+
+        <!-- Workflow -->
+        <section id="workflow">
+            <h2>Inspection Workflow</h2>
+            <p>BridgeLog follows a simple four step workflow for each photo you add to an inspection.</p>
+
+            <h3>1 - Select Bridge Element</h3>
+            <p>Choose the structural element you are photographing from a searchable list of 43 bridge elements. These are organised into groups including deck, substructure, durability, safety, and other categories. You can also select "General photos of structure" for overall condition shots.</p>
+
+            <h3>2 - Capture Photo</h3>
+            <p>Take a photo using your camera or import one from your photo library. If location services are enabled, GPS coordinates are automatically extracted and stored with the photo. Photos are resized for efficient storage while maintaining quality.</p>
+
+            <h3>3 - Describe Photo / Defect</h3>
+            <p>Select a defect category and specific defect type that describes what you have photographed. You can also type a custom description. Defect categories cover metalwork, concrete, timber, masonry, bearings, cables, coatings, surfacing, movement joints, drainage, parapets, substructure, post-tensioned elements, and general items.</p>
+
+            <h3>4 - Add Photo</h3>
+            <p>Tap "Add Photo" to save the photo to your inspection. You can optionally set a plan location before or after adding the photo. All photos appear in the photos list below where you can review, edit, or delete them.</p>
+
+            <div class="tip-box">
+                <p><span class="tip-label">Tip:</span> You can edit any photo after adding it by tapping on it in the photos list. Change the element, defect description, or plan location at any time.</p>
+            </div>
+        </section>
+
+        <!-- Features -->
+        <section id="features">
+            <h2>Features</h2>
+
+            <h3>Plan Marking</h3>
+            <p>Upload a plan drawing and mark where each photo was taken. Tap anywhere on the plan to place a numbered marker. Adjust the directional arrow to show which way the camera was pointing. Pinch to zoom in for precise placement on detailed drawings. Existing markers from other photos are shown faded for reference.</p>
+            <p>You can adjust the marker size using the scale slider to suit your plan drawing. Marker sizes are saved and applied across all photos in the inspection.</p>
+
+            <h3>GPS Mapping</h3>
+            <p>Photos with GPS data are displayed on an interactive map. GPS coordinates are extracted automatically from photo EXIF metadata when location services are enabled. The map shows numbered markers for each geotagged photo, allowing you to see the spatial distribution of your inspection photos.</p>
+
+            <h3>Bridge Elements (CS 450)</h3>
+            <p>BridgeLog includes all 43 standard bridge elements based on CS 450 and the Inspection Manual for Highway Structures, organised into the following groups:</p>
+            <div class="element-grid">
+                <span>Primary deck element</span>
+                <span>Abutments</span>
+                <span>Transverse beams</span>
+                <span>Pier/column</span>
+                <span>Secondary deck element</span>
+                <span>Cross head/capping beam</span>
+                <span>Half joints</span>
+                <span>Bearings</span>
+                <span>Tie beam/rod</span>
+                <span>Foundations</span>
+                <span>Parapet beam</span>
+                <span>Movement joints</span>
+                <span>Deck bracing</span>
+                <span>Waterproofing</span>
+                <span>Handrail/parapet</span>
+                <span>Drainage</span>
+                <span>Carriageway surfacing</span>
+                <span>Wing walls</span>
+                <span>Retaining walls</span>
+                <span>Embankments</span>
+            </div>
+            <p style="margin-top: 8px; font-size: 14px; color: #86868b;">And 23 more including finishes, access, lighting, services, vegetation, and specialist elements.</p>
+
+            <h3>Defect Categories</h3>
+            <p>Comprehensive defect classification aligned with CS 450 across 13 categories:</p>
+            <ul class="feature-list">
+                <li>Metalwork: corrosion, connections, weld cracking, pitting, distortion, impact damage</li>
+                <li>Concrete: spalling, cracking, delamination, exposed reinforcement, ASR, carbonation</li>
+                <li>Timber: rot, fungal decay, insect attack, splitting, warping, weathering</li>
+                <li>Masonry: pointing, arch ring separation, bulging, frost damage, vegetation growth</li>
+                <li>Bearings: seized, excessive movement, elastomer deterioration, misalignment</li>
+                <li>Cables/Hangers: wire breaks, anchorage corrosion, protective coating damage</li>
+                <li>Coatings/Paint: chalking, blistering, flaking, under-film corrosion</li>
+                <li>Surfacing/Waterproofing: cracking, rutting, potholes, waterproofing failure</li>
+                <li>Movement Joints: sealant failure, debris accumulation, nosing damage, leaking</li>
+                <li>Drainage: blocked, pipe damage, weephole blocked, scour damage</li>
+                <li>Parapets/Barriers: impact damage, loose fixings, missing sections</li>
+                <li>Substructure: scour, settlement, erosion, undermining, flood damage</li>
+                <li>Post-tensioned: duct blockage, grout voids, tendon corrosion, strand failure</li>
+            </ul>
+
+            <h3>Photo Management</h3>
+            <p>The photo summary card shows a count of all photos in your inspection along with storage usage. You can see how many photos have been placed on the plan and how many have GPS data. Tap any photo in the list to view it full screen with pinch to zoom, edit its details, change its plan location, or delete it.</p>
+
+            <h3>Multi-Project Management</h3>
+            <p>The gallery screen lets you manage all your inspection projects. Long press or swipe on any project to rename, duplicate, export, or delete it. Projects are sorted by last modified date. You can import inspection packages from other devices using the Import button.</p>
+
+            <h3>Preview</h3>
+            <p>Preview your inspection before exporting. The preview shows all photos with their element names, defect descriptions, GPS coordinates, and timestamps in the same format they will appear in your exported reports.</p>
+        </section>
+
+        <!-- Exports -->
+        <section id="exports">
+            <h2>Export Options</h2>
+            <p>BridgeLog offers five export formats to suit different needs. All exports are generated locally on your device and shared using the standard iOS share sheet.</p>
+
+            <table class="export-table">
+                <tr>
+                    <th>Format</th>
+                    <th>Best For</th>
+                </tr>
+                <tr>
+                    <td>PDF Report</td>
+                    <td>Professional photo reports for submission. Includes a title page with all photos, element names, defect descriptions, and GPS coordinates. Customisable photo sizes.</td>
+                </tr>
+                <tr>
+                    <td>Word Document</td>
+                    <td>Editable reports. Same layout as the PDF but in .docx format so you can modify the content in Microsoft Word or other editors before submission.</td>
+                </tr>
+                <tr>
+                    <td>Plan PDF</td>
+                    <td>Annotated plan drawing export. Shows your plan image with all numbered photo markers in their placed positions.</td>
+                </tr>
+                <tr>
+                    <td>Interactive HTML</td>
+                    <td>A self-contained interactive viewer. Open in any browser to zoom and pan the plan, click markers to view photos. Works completely offline. Ideal for sharing with colleagues who can view it on any desktop or laptop.</td>
+                </tr>
+                <tr>
+                    <td>ZIP Backup</td>
+                    <td>Complete inspection archive containing all photos, metadata, and plan image. Use this to transfer inspections between devices or as a backup. Import on another device using the Import function.</td>
+                </tr>
+            </table>
+
+            <div class="tip-box">
+                <p><span class="tip-label">Tip:</span> You can adjust the photo size in PDF and Word exports using the width slider. This lets you fit more photos per page or make individual photos larger for detail.</p>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section id="faq">
+            <h2>Frequently Asked Questions</h2>
+
+            <h3>Where is my data stored?</h3>
+            <p>All data is stored locally on your iPhone. Photos are saved in the app's container within your device storage. No data is sent to any server.</p>
+
+            <h3>Do I need an internet connection?</h3>
+            <p>No. BridgeLog works entirely offline. You only need an internet connection if you choose to share exported files via email or cloud services.</p>
+
+            <h3>How do I transfer inspections to another device?</h3>
+            <p>Export your inspection as a ZIP backup, send it to the other device (via AirDrop, email, or any file sharing method), then use the Import button in BridgeLog on the receiving device.</p>
+
+            <h3>Can I edit a photo after adding it?</h3>
+            <p>Yes. Tap any photo in the photos list to open it for editing. You can change the element, defect description, and plan location. Changes are saved automatically.</p>
+
+            <h3>How does GPS tagging work?</h3>
+            <p>When you capture a photo with your camera while location services are enabled, GPS coordinates are embedded in the photo metadata. BridgeLog extracts these coordinates and stores them with the photo. If you import a photo from your library that already has GPS data, those coordinates are used automatically.</p>
+
+            <h3>What plan image formats are supported?</h3>
+            <p>BridgeLog accepts any standard image format including JPEG and PNG. You can take a photo of a paper plan, screenshot a PDF, or use any digital plan image from your photo library.</p>
+
+            <h3>Is there a limit on the number of photos?</h3>
+            <p>There is no fixed limit. The number of photos you can store depends on your available device storage. The photo summary card shows your current storage usage.</p>
+
+            <h3>Can I use BridgeLog for structures other than bridges?</h3>
+            <p>Yes. While the element list is based on CS 450 bridge elements, you can use BridgeLog for any type of structural inspection. The "General photos of structure" element and custom defect descriptions allow flexibility for other structure types.</p>
+
+            <h3>What happens if I delete the app?</h3>
+            <p>Deleting the app permanently removes all inspection data and photos from your device. Make sure to export any inspections you want to keep as ZIP backups before deleting the app.</p>
+
+            <h3>How do I switch between light and dark mode?</h3>
+            <p>Tap the settings icon on the gallery screen and toggle dark mode on or off.</p>
+        </section>
+
+        <!-- Contact -->
+        <div class="contact-card" id="contact">
+            <h2>Need Help?</h2>
+            <p>If you have a question, found a bug, or have a feature request, please get in touch.</p>
+            <a class="contact-button" href="mailto:daniel123ayala@gmail.com">Email Support</a>
+            <p style="margin-top: 16px;"><a class="contact-link" href="mailto:daniel123ayala@gmail.com">daniel123ayala@gmail.com</a></p>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <p>&copy; 2026 BridgeLog. All rights reserved. | <a href="privacy.html">Privacy Policy</a></p>
+</footer>
+
+</body>
+</html>
